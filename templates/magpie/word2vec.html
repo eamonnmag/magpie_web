@@ -1,0 +1,11 @@
+{% extends "magpie/base.html" %}
+{%- block content -%}
+    <div class="form-container" align="center">
+        <div class="logo"></div>
+        {% include "magpie/components/word2vec_form.html" %}
+    </div>
+
+    <div align="center" class="links">
+        <a href="/" >keyword extraction tool</a> | <a href="/about">about magpie</a>
+    </div>
+{%- endblock -%}

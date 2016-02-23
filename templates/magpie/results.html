@@ -1,0 +1,23 @@
+{% extends "magpie/base.html" %}
+{%- block content -%}
+    <div class="form-container" align="center">
+        <div class="logo"></div>
+
+        {% if ctx == 'word2vec' %}
+            <ul>
+            {% for result in results.vector %}
+                 <li>{{ result[0] }} - {{ result[1] }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+             <ul>
+            {% for result in results.keywords %}
+                 <li>{{ result[0] }} - {{ result[1] }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div align="center">
+        <a href="/{% if ctx == 'word2vec' %}word2vec{% endif %}">back</a>
+    </div>
+{%- endblock -%}
