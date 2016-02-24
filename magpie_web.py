@@ -43,10 +43,10 @@ def word2vec():
         data = {'domain': 'hep'}
         ctx = {'type': 'word2vec'}
         if positive:
-            data['positive'] = positive.split(',')
+            data['positive'] = [w.strip() for w in positive.split(',')]
             ctx['positive'] = ", ".join(data['positive'])
         if negative:
-            data['negative'] = negative.split(',')
+            data['negative'] = [w.strip() for w in negative.split(',')]
             ctx['negative'] = ", ".join(data['negative'])
 
         response = requests.post(WORD2VEC_URL,
