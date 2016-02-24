@@ -1,16 +1,24 @@
 <div align="left">
-    <p>Place the abstract for the publication in the area below.</p>
-    <form method="POST" class="form-horizontal" action=".">
-        <input type="hidden" name="domain" value="hep"/>
-        <div class="form-group">
-
-            <label>Paper Abstract</label>
-
-            <textarea class="form-control extraction-text" name="text"></textarea>
+    <div id="progress-view" class="hidden">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
         </div>
+    </div>
+    <div id="form-view">
+        <p>Place the abstract for the publication in the area below.</p>
+        <form method="POST" class="form-horizontal" action=".">
+            <input type="hidden" name="domain" value="hep"/>
+            <div class="form-group">
+                <label>Paper Abstract</label>
+                <textarea class="form-control extraction-text" name="text"></textarea>
+            </div>
 
-        <div align="center">
-            <input type="submit" class="btn btn-lg btn-success btn-extract-keywords" value="Extract Keywords"/>
-        </div>
-    </form>
+            <div align="center">
+                <input type="submit" class="btn btn-lg btn-success btn-extract-keywords" value="Extract Keywords"
+                       onclick="document.getElementById('progress-view').className = ''; document.getElementById('form-view').className = 'hidden'; return true;"/>
+            </div>
+        </form>
+    </div>
 </div>
