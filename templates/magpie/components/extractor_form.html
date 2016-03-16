@@ -8,15 +8,24 @@
     </div>
     <div id="form-view">
         <p>Place the abstract for the publication in the area below.</p>
+
         <form method="POST" class="form-horizontal" action=".">
-            <input type="hidden" name="domain" value="hep"/>
+
+            <div class="form-group">
+                <label>Operation</label>
+                <select name="corpus" class="form-control">
+                    <option value="hep-keywords" selected>Extract Keywords</option>
+                    <option value="hep-categories">Extract Subject Classification</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label>Paper Abstract</label>
                 <textarea class="form-control extraction-text" name="text"></textarea>
             </div>
 
             <div align="center">
-                <input type="submit" class="btn btn-lg btn-success btn-extract-keywords" value="Extract Keywords"
+                <input type="submit" class="btn btn-lg btn-success btn-extract-keywords" value="Extract"
                        onclick="document.getElementById('progress-view').className = ''; document.getElementById('form-view').className = 'hidden'; return true;"/>
             </div>
         </form>

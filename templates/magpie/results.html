@@ -28,7 +28,8 @@
             <form action="/extract-feedback" method="POST">
                 <input type="hidden" name="abstract_text" value="{{ ctx.abstract }}">
                 <div class="results-list">
-                    <p>Detected Keywords <br/><span class="small-text">you can feedback incorrect keywords to our model</span>.</p>
+                    <p>Detected Keywords <br/><span
+                            class="small-text">you can feedback incorrect keywords to our model</span>.</p>
 
                     {% for result in results.labels %}
                         <div class="row-fluid" align="left">
@@ -43,7 +44,7 @@
                             <div class="col-md-3" align="right">
                                 <div class="onoffswitch">
                                     <input type="checkbox" name="{{ result[0] }}" class="onoffswitch-checkbox"
-                                           id="myonoffswitch-{{ loop.index }}" checked>
+                                           id="myonoffswitch-{{ loop.index }}" {% if result[1] > 0.25 %}checked{% endif %}>
                                     <label class="onoffswitch-label" for="myonoffswitch-{{ loop.index }}"></label>
                                 </div>
                             </div>
@@ -53,7 +54,11 @@
                     {% endfor %}
                 </div>
                 <div class="clearfix"></div>
-                <input type="submit" class="btn btn-lg btn-primary btn-extract-keywords" value="Confirm Keywords">
+                {% if ctx.corpus %}
+                    <input type="submit" class="btn btn-lg btn-primary btn-extract-keywords"
+                           value="Confirm {% if ctx.corpus == 'hep-keywords' %} Keywords {% else %} Subject Areas{% endif %}">
+                {% endif %}
+
             </form>
         {% endif %}
     </div>

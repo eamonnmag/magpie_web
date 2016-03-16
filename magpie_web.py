@@ -14,14 +14,16 @@ headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 def extractor():
     if request.method == 'POST':
         text = request.form.get('text', '')
+        corpus = request.form.get('corpus', 'hep-keywords')
         extract_headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
-        response = requests.post(EXTRACT_URL, data=json.dumps({'corpus': 'hep-keywords', 'text': text}), headers=extract_headers)
+        response = requests.post(EXTRACT_URL, data=json.dumps({'corpus': corpus, 'text': text}), headers=extract_headers)
+
         contents = json.loads(response.text)
 
         contents['labels'] = contents['labels'][0:20]
 
-        ctx = {'type': 'extract', 'abstract': text}
+        ctx = {'type': 'extract', 'abstract': text, 'corpus': corpus}
         return render_template('magpie/results.html', results=contents, ctx=ctx)
 
     return render_template('magpie/extractor.html')
