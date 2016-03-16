@@ -28,7 +28,7 @@
             <form action="/extract-feedback" method="POST">
                 <input type="hidden" name="abstract_text" value="{{ ctx.abstract }}">
                 <div class="results-list">
-                    <p>Detected Keywords <br/><span
+                    <p>Detected {% if ctx.corpus == 'hep-keywords' %}Keywords{% else %}Subject Areas{% endif %} <br/><span
                             class="small-text">you can feedback incorrect keywords to our model</span>.</p>
 
                     {% for result in results.labels %}
