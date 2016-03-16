@@ -16,10 +16,10 @@ def extractor():
         text = request.form.get('text', '')
         extract_headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
-        response = requests.post(EXTRACT_URL, data=json.dumps({'domain': 'hep', 'text': text}), headers=extract_headers)
+        response = requests.post(EXTRACT_URL, data=json.dumps({'corpus': 'hep-keywords', 'text': text}), headers=extract_headers)
         contents = json.loads(response.text)
 
-        contents['keywords'] = contents['keywords'][0:20]
+        contents['labels'] = contents['labels'][0:20]
 
         ctx = {'type': 'extract', 'abstract': text}
         return render_template('magpie/results.html', results=contents, ctx=ctx)
@@ -40,13 +40,13 @@ def word2vec():
         positive = request.form.get('positive', None)
         negative = request.form.get('negative', None)
 
-        data = {'domain': 'hep'}
+        data = {'corpus': 'hep-keywords'}
         ctx = {'type': 'word2vec'}
         if positive:
-            data['positive'] = positive.split(',')
+            data['positive'] = [w.strip() for w in positive.split(',')]
             ctx['positive'] = ", ".join(data['positive'])
         if negative:
-            data['negative'] = negative.split(',')
+            data['negative'] = [w.strip() for w in negative.split(',')]
             ctx['negative'] = ", ".join(data['negative'])
 
         response = requests.post(WORD2VEC_URL,
