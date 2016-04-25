@@ -14,7 +14,7 @@ headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 def extractor():
     if request.method == 'POST':
         text = request.form.get('text', '')
-        corpus = request.form.get('corpus', 'hep-keywords')
+        corpus = request.form.get('corpus', 'keywords')
         extract_headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
         response = requests.post(EXTRACT_URL, data=json.dumps({'corpus': corpus, 'text': text}), headers=extract_headers)
@@ -42,7 +42,7 @@ def word2vec():
         positive = request.form.get('positive', None)
         negative = request.form.get('negative', None)
 
-        data = {'corpus': 'hep-keywords'}
+        data = {'corpus': 'keywords'}
         ctx = {'type': 'word2vec'}
         if positive:
             data['positive'] = [w.strip() for w in positive.split(',')]
@@ -65,4 +65,4 @@ def thanks():
     return render_template('magpie/thanks.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5050, debug=True)
